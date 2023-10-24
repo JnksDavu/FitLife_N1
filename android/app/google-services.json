@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "380268421012",
+    "project_id": "fitlife-1ceb3",
+    "storage_bucket": "fitlife-1ceb3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:380268421012:android:b5726fbe741976990eb981",
+        "android_client_info": {
+          "package_name": "com.example.gamestellar"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXPOx_jm8F6F6nTVJ4KuwFFvC4hlMnLBU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

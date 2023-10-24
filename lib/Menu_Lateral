@@ -1,0 +1,68 @@
+import 'package:flutter/material.dart';
+import 'package:gamestellar/Button.dart';
+import 'package:gamestellar/app.dart';
+import 'package:gamestellar/login.dart';
+
+class NavDrawerDemo extends StatelessWidget {
+  const NavDrawerDemo({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    var localization = GalleryLocalizations.of(context)!;
+    final drawerHeader = UserAccountsDrawerHeader(
+      accountName: Text(
+        localization.demoNavigationDrawerUserName,
+      ),
+      accountEmail: Text(
+        localization.demoNavigationDrawerUserEmail,
+      ),
+      currentAccountPicture: const CircleAvatar(
+        child: Icon(Icons.person, size: 42.0), // Substituído FlutterLogo por Icon
+      ),
+    );
+    final drawerItems = ListView(
+      children: [
+        drawerHeader,
+        ListTile(
+          title: Text(
+            localization.demoNavigationDrawerToPageOne,
+          ),
+          leading: const Icon(Icons.favorite),
+          onTap: () {
+            Navigator.pop(context);
+          },
+        ),
+        ListTile(
+          title: Text(
+            localization.demoNavigationDrawerToPageTwo,
+          ),
+          leading: const Icon(Icons.comment),
+          onTap: () {
+            Navigator.pop(context);
+          },
+        ),
+      ],
+    );
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          localization.demoNavigationDrawerTitle,
+        ),
+      ),
+      body: Semantics(
+        container: true,
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(50.0),
+            child: Text(
+              localization.demoNavigationDrawerText,
+            ),
+          ),
+        ),
+      ),
+      drawer: Drawer(
+        child: drawerItems,
+      ),
+    );
+  }
+}

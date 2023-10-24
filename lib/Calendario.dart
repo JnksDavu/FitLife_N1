@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gamestellar/Button.dart';
 import 'package:gamestellar/app.dart';
 import 'package:gamestellar/login.dart';
-
+import 'package:gamestellar/app.dart';
 
 class TradePage extends StatefulWidget {
   const TradePage({Key? key});
@@ -15,28 +15,62 @@ class _TradePageState extends State<TradePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color.fromARGB(255, 255, 255, 255),
-      body: SingleChildScrollView(
+    final drawerHeader = UserAccountsDrawerHeader(
+      decoration: BoxDecoration(
+        color: Color.fromRGBO(97, 87, 132,1.0),
+      ),
+      accountName: Text('Nome do Usuário'),
+      accountEmail: Text('usuario@email.com'),
+      currentAccountPicture: const CircleAvatar(
+        child: Icon(Icons.person, size: 42.0),
+      ),
+    );
+    final drawerItems = ListView(
+      children: [
+        drawerHeader,
+        ListTile(
+          title: Text('Home'),
+          leading: const Icon(Icons.home),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => LoginPage()), // Navega para a HomePage
+            );
+          },
+        ),
+        ListTile(
+          title: Text('Exercícios'),
+          leading: const Icon(Icons.fitness_center), // Ícone de musculação
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => MyApp()), // Navega para a página de exercícios
+            );
+          },
+        ),
+      ],
+    );
+    return WillPopScope(
+  onWillPop: () async => false, // Intercepta a ação de voltar
+  child: Scaffold(
+    appBar: AppBar(
+      title: Center(
+        child: Image.asset('images/logo.png', fit: BoxFit.cover),
+      ),
+      backgroundColor: Color.fromRGBO(97, 87, 132,1.0),
+    ),
+    drawer: Drawer( // Adicione esta linha
+      child: drawerItems,
+    ),
+    body: SingleChildScrollView(
         padding: const EdgeInsets.all(5),
         child: Center(
           child: Column(
             //crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              IconButton(
-
-              icon: const Icon(Icons.menu),
-
-              iconSize: 30,
-
-              color: Color.fromARGB(255, 119, 17, 252),
-
-              onPressed: () {
-
-                Navigator.push(context,MaterialPageRoute(builder: (context) => const LoginPage()));
-
-              },),
+          
+            children: [
+            
               SizedBox(height: 75,),            
               Container(
                 padding: EdgeInsets.all(25),
@@ -160,6 +194,6 @@ class _TradePageState extends State<TradePage> {
         
       ),
        
-    );
+    ),);
 }
 }
