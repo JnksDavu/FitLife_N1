@@ -1,4 +1,4 @@
-# FitLife_N1
+# FitLife_N2
 
 Tutorial para Conexão e implementação da aplicação:
 
