@@ -35,31 +35,29 @@ class _ExerciciosState extends State<Exercicios> {
   final nomeColecaoController = TextEditingController();
   Map<String, String> docIds = {};
 
- void criarExercicios() async {
+void criarExercicios() async {
   if (nomeColecaoController.text.isEmpty) {
     // O nome da coleção é obrigatório
     return;
   }
 
-  CollectionReference listaExercicios = FirebaseFirestore.instance.collection(nomeColecaoController.text);
+  CollectionReference listaExercicios = FirebaseFirestore.instance.collection('colecao');
 
-  // Verificar se a coleção já existe
-  var snapshot = await listaExercicios.get();
+  // Verificar se o documento já existe
+  var snapshot = await listaExercicios.doc(nomeColecaoController.text).get();
 
-  if (!snapshot.docs.isEmpty) {
-    // Se a coleção existir, excluir todos os documentos
-    for (var doc in snapshot.docs) {
-      await listaExercicios.doc(doc.id).delete();
-    }
+  if (snapshot.exists) {
+    // Se o documento existir, excluir todos os campos
+    await listaExercicios.doc(nomeColecaoController.text).delete();
   }
 
   // Adicionar novos exercícios
   for (int i = 0; i < valoresSelecionados.length; i++) {
-    await listaExercicios.add({
-      'exercicio': valoresSelecionados[i],
-      'minutos': controllers[i].text,
-    });
-  }
+  await listaExercicios.doc(nomeColecaoController.text).set({
+    'exercicio${i+1}': valoresSelecionados[i],
+    'minutos${i+1}': controllers[i].text,
+  }, SetOptions(merge: true));
+}
 }
   void removerLista() {
     if (valoresSelecionados.length > 1) { // Para garantir que pelo menos uma lista suspensa permaneça

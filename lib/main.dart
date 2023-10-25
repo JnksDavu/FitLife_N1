@@ -6,18 +6,12 @@ import 'package:gamestellar/firebase_options.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'firebase_options.dart';
 import 'package:gamestellar/Exercicios.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  runApp(
-    MaterialApp(
-      initialRoute: '/',
-      routes: {
-        '/': (context) => MyApp(),
-        'app': (context) => MyApp(),
-      },
-    ),
-  );
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -26,13 +20,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'FitLife',
       theme: ThemeData(
         primaryColor: Colors.deepPurple,
         scaffoldBackgroundColor: Color.fromARGB(255, 223, 223, 223), // Escolha a cor que você deseja
       ),
-      home: const LoginPage(),
-      debugShowCheckedModeBanner: false,
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const LoginPage(),
+        'app': (context) => const LoginPage(),
+      },
     );
   }
 }
